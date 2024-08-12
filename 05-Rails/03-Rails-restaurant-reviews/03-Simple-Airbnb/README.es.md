@@ -23,6 +23,13 @@ git add .
 git commit -m "rails new"
 gh repo create --public --source=.
 git push origin master
+echo "gem 'rspec-rails', group: [ :test ]" >> Gemfile
+echo "gem 'rails-controller-testing', group: [ :test ]" >> Gemfile
+bundle install
+git submodule add git@github.com:lewagon/rails-simple-airbnb-specs.git spec
+git add .
+git commit -m "Prepare rails app with external specs"
+rspec # to run the tests
 ```
 
 ## Configuración del Front-end
@@ -66,6 +73,20 @@ Luego ejecuta esto:
 ```bash
 bundle install
 rails generate simple_form:install --bootstrap
+```
+
+### Probar tu código
+
+Siempre que añadas migraciones a tu aplicación (por ejemplo, después de ejecutar `rails g model ...`), no olvides ejecutar también las migraciones **en la base de datos de pruebas** que usamos en nuestras especificaciones:
+
+```bash
+rails db:migrate RAILS_ENV=test  # Si agregaste una migración
+```
+
+Luego prueba tu código con:
+
+```bash
+rspec
 ```
 
 ## Especificaciones
@@ -114,7 +135,7 @@ La lista debe hacer un bucle sobre ellas y mostrarlas como se muestra en la capt
 
 Recuerda que para crear un apartamento se necesitan dos rutas. Una de ellas muestra el formulario de creación y la otra maneja la petición `POST` que se genera cuando se envía el formulario. Intenta usar el helper `form_with` directamente en la vista y ¡haz que se vea bien!
 
-![](https://raw.githubusercontent.com/lewagon/fullstack-images/master/rails/simple-airbnb/index.png).
+![](https://raw.githubusercontent.com/lewagon/fullstack-images/master/rails/simple-airbnb/new.png).
 
 ### 6 - Como usuario, puedo ver información detallada de un apartamento dado
 

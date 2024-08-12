@@ -36,6 +36,7 @@ Next up is to define which attributes (if any) are **readable** and which are **
   - the number of `votes` can be seen and incremented through upvoting, but should not be directly editable
 
 ### Part 2: READ
+
 In this part of the exercise, we will focus on implementing our **R**ead (the `R` in `CRUD`) actions.
 
 There are two scenarios in which we may want to **read** from our database:
@@ -49,7 +50,32 @@ Let's implement these scenarios with the following methods:
 
 Implement a **class** method `find(id)` on the `Post` class that takes an integer as an argument (the post id) and returns an instance of `Post`.
 
+---
+
+**Important:** The first line of your method should be this:
+
+```rb
+DB.results_as_hash = true
+```
+
+By default, when you query the database with a `SELECT` query, the `sqlite3` gem will give you something back like this:
+
+```rb
+[[1, "Why cats are awesome", "www.google.com", 10], ...]
+```
+
+This format is a little bit confusing, right? You'd have to remember that for each `row`, `row[0]` is the id, `row[1]` is the title, and so on. Wouldn't it be nicer if we could just ask for the id, instead of needing to remember that it's the first item in the array? Well, we can by having`sqlite3` give us back a `Hash` by saying `DB.results_as_hash = true`. Then, we'd get something back like:
+
+```rb
+[{ "id" => 1, "title" => Why cats are awesome", "url" => "www.google.com", "votes" => 10}, ...]
+```
+
+So, for each `row`, we could access `row["id"]` or `row["title"]` and don't have to think about confusing `Array` structures anymore 💪
+
+---
+
 Let's use **pseudocode** to help us in breaking down the steps we'll need:
+
 ```ruby
 # TODO: Write the SQL query to get the post with the given id
 # TODO: Use DB.execute to execute the SQL query
@@ -61,6 +87,7 @@ Let's use **pseudocode** to help us in breaking down the steps we'll need:
 💡 HINT: make sure to pay attention to what **data type** you get back from the `DB.execute` method versus what data type **you need** to have inside your model. How can we make sure we end up with a `Post` instance?
 
 ##### SQL injections
+
 As we learned in the lecture, we also need to protect our `find` method against **SQL injections**. As a reminder, an SQL injection is a serious security issue, where an attacker can interfere with your application by means of malicious queries to the database. Potential effects are, for example, allowing an ill-intended user to access restricted data, i.e. social security numbers, credit cards, or passwords 😱. In some cases, the attacker can even change or delete data, permanently damaging the application. If you want to read more about SQL injections and see some examples, check out the _Additional Resources_ section at the bottom of this challenge.
 
 To protect your database against SQL injections, you must never interpolate SQL queries with user data but use `?` [**placeholders**](http://ruby.bastardsbook.com/chapters/sql/#placeholders-sqlite-gem) instead.
@@ -71,7 +98,14 @@ To protect your database against SQL injections, you must never interpolate SQL 
 
 Next, implement a **class** method `all` on the `Post` class which takes no argument and will return an array containing every `Post` instance our database has.
 
+**Important:** The first line of your method should be this, like we did with `#find`:
+
+```rb
+DB.results_as_hash = true
+```
+
 Again, let's use **pseudocode** to help us break down our steps:
+
 ```ruby
 # TODO: Write the SQL query to get all posts from the database
 # TODO: Use DB.execute to execute the SQL query

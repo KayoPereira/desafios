@@ -14,8 +14,7 @@ Run the server from your terminal with:
 serve
 ```
 
-And visit `localhost:8000`. You can see a form with a readonly input containing an API key and a button allowing the user to easily copy it.
-Your mission is to implement the copy to clipboard feature.
+And visit `localhost:8000`. You can see a form with a readonly input containing an API key and a button allowing the user to easily copy it. Your mission is to implement the copy to clipboard feature.
 
 This time, `Stimulus` is already setup in the `index.html` head.
 
@@ -24,7 +23,7 @@ However, you still need to get used to doing the JavaScript setup part yourself.
 Create a `copy_to_clipboard_controller.js` file in the empty `controllers` folder, copy-paste the boilerplate:
 
 ```javascript
-// lib/controllers/event_listener_controller.js
+// lib/controllers/copy_to_clipboard_controller.js
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -45,6 +44,7 @@ Once you click on the *Copy to Clipboard* button, you can then use `ctrl + v` to
 ### 1. Inspect the existing HTML
 
 The provided HTML contains an input with interesting attributes. The `value` is already set in order to contain an API key by default at page load.
+
 The `readonly` attribute ensures that no one is able to edit the existing text or introduce a typo.
 
 ### 2. Implement the Stimulus Controller

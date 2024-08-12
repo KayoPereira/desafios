@@ -29,7 +29,7 @@ We will import the `Chart.js` plugin with `importmap`.
 Then, we will use the plugin to implement 3 different types of charts in the challenge:
 - a [doughnut chart](https://www.chartjs.org/docs/latest/charts/doughnut.html)
 - a [line chart](https://www.chartjs.org/docs/latest/charts/line.html)
-- a [radar chart](https://www.chartjs.org/docs/latest/charts/radar.html)
+- a [polar chart](https://www.chartjs.org/docs/latest/charts/polar.html)
 
 Have a look at the documentation to understand how each type work.
 
@@ -114,7 +114,7 @@ new Chart(this.element, {
 });
 ```
 
-Based on our `WorldPopulation` object, how can you build an array `labels` containing `"men"` and `"woman"` and a second array `data` containing `504` and `496`?
+Based on our `WorldPopulation` object, how can you build an array `labels` containing `"men"` and `"women"` and a second array `data` containing `504` and `496`?
 
 Have a look at the existing methods on JavaScript objects like `Object.keys()` in the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) to give you an idea on how to create arrays based on an Object.
 

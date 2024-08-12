@@ -21,20 +21,22 @@ There are three files you need to update:
 To get suggestions, you can use the following API:
 
 ```bash
-GET https://wagon-dictionary.herokuapp.com/autocomplete/:stem
+GET https://dictionary.lewagon.com/autocomplete/:stem
 ```
 
 Here, you will replace `:stem` with the characters typed by the user. As soon as the user enters a new character (`keyup` maybe?), you will trigger a new AJAX call. If you look at your "Network" tab in Chrome Inspector you should see something like this:
 
 ```bash
-https://wagon-dictionary.herokuapp.com/autocomplete/u
-https://wagon-dictionary.herokuapp.com/autocomplete/un
-https://wagon-dictionary.herokuapp.com/autocomplete/und
-https://wagon-dictionary.herokuapp.com/autocomplete/unde
-https://wagon-dictionary.herokuapp.com/autocomplete/under
+https://dictionary.lewagon.com/autocomplete/u
+https://dictionary.lewagon.com/autocomplete/un
+https://dictionary.lewagon.com/autocomplete/und
+https://dictionary.lewagon.com/autocomplete/unde
+https://dictionary.lewagon.com/autocomplete/under
 etc.
 ```
 
 When you receive the JSON from the API, your job is to update the `ul#results` list with suggestions!
 
 Once you have the basic behavior, don't hesitate to try and make the `ul#results` look 🎨 really good 🎨 😋
+
+![Animated gif of final goal, showing a list of auto sugesstions that pop up while typing.](https://raw.githubusercontent.com/lewagon/fullstack-images/3a1b80803f1fa3fc59b79530101847d852d21170/frontend/autocomplete.gif)

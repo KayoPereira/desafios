@@ -36,7 +36,7 @@ gh repo create --public --source=.
 git push origin master
 ```
 
-Let's import the teacher's spec to be able to `rake` our progress.
+Let's import the teacher's spec to be able to `rspec` our progress. **Note: You will use the `rspec` command instead of the `rake` command to run the tests for this challenge.**
 
 ```bash
 echo "gem 'rspec-rails', group: [ :test ]" >> Gemfile
@@ -77,8 +77,8 @@ Then let's download the Le Wagon's stylesheets:
 
 ```bash
 rm -rf app/assets/stylesheets
-curl -L https://github.com/lewagon/stylesheets/archive/more-js.zip > stylesheets.zip
-unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-more-js app/assets/stylesheets
+curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip
+unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets
 ```
 
 Finally let's import the Boostrap JS library with `importmap`:
@@ -87,19 +87,8 @@ Finally let's import the Boostrap JS library with `importmap`:
 importmap pin bootstrap
 ```
 
-We need to update the `popper` link pinned by the command in the `importmap.rb` file, so replace this line by the following one:
-
-```ruby
-pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.6/lib/index.js" # delete this line
-```
-
-And replace it with:
-
-```ruby
-pin "@popperjs/core", to: "https://unpkg.com/@popperjs/core@2.11.2/dist/esm/index.js" # use unpkg.com as ga.jspm.io contains a broken popper package"
-```
-
 In `application.js`, add the following lines:
+
 ```js
 // app/javascript/application.js
 import "bootstrap"
@@ -107,10 +96,25 @@ import "@popperjs/core"
 ```
 
 And then in `manifest.js`, add the following lines:
+
 ```js
 // app/assets/config/manifest.js
 //= link popper.js
 //= link bootstrap.min.js
+```
+
+And finally in `config/importmap.rb`:
+
+```rb
+# config/importmap.rb
+
+# replace these lines:
+# pin "bootstrap" # @5.3.2
+# pin "@popperjs/core", to: "@popperjs--core.js" # @2.11.8
+
+# with this:
+pin "bootstrap", to: "bootstrap.min.js", preload: true
+pin "@popperjs/core", to: "popper.js", preload: true
 ```
 
 Don't forget to `commit` and `push` your work often.
@@ -123,7 +127,7 @@ Go to [db.lewagon.com](http://db.lewagon.com) and draw the schema with your budd
 
 ![](https://raw.githubusercontent.com/lewagon/fullstack-images/master/rails/watch-list/db.png)
 
-Once you've finished designing the schema, it's time to implement the models inside your app. Make sure to set them up with the right attributes, validations, and associations, using the tests as a guide together with the specifications found below. 
+Once you've finished designing the schema, it's time to implement the models inside your app. Make sure to set them up with the right attributes, validations, and associations, using the tests as a guide together with the specifications found below.
 
 **Important**
 
@@ -187,8 +191,8 @@ The endpoints of the API requires you to sign up and generate an API key. Since 
 Here's how it works:
 
 1. the API would say: use `https://api.themoviedb.org/3/movie/top_rated?api_key=<your_api_key>`
-2. What you should do is replace this part of the url `https://api.themoviedb.org/3` by `http://tmdb.lewagon.com`
-3. You can [try it here](http://tmdb.lewagon.com/movie/top_rated)
+2. What you should do is replace this part of the url `https://api.themoviedb.org/3?api_key=<your_api_key>` by `https://tmdb.lewagon.com`. For example, `https://api.themoviedb.org/3/movie/top_rated?api_key=<your_api_key>` would become `https://tmdb.lewagon.com/movie/top_rated`.
+3. You can [try it here](https://tmdb.lewagon.com/movie/top_rated)
 
 **Movie Images**
 
@@ -198,7 +202,7 @@ To understand how to get the movie images from the API, make sure to carefully r
 
 **Important**
 
-Don't use `rake` to code the applicative part. It's time to launch a `rails s` in your terminal and open a browser at [http://localhost:3000/](http://localhost:3000/). Always code in silo:
+Don't use `rspec` to code the applicative part. It's time to launch a `rails s` in your terminal and open a browser at [http://localhost:3000/](http://localhost:3000/). Always code in silo:
 
 - start with the **route**,
 - then start coding the **controller**,
@@ -206,9 +210,10 @@ Don't use `rake` to code the applicative part. It's time to launch a `rails s` i
 
 When your feature is done (and looks good), move on to the next one and repeat the process!
 
-When you think you're done with the **whole** challenge, use `rake` to make sure it satisfies the specs.
+When you think you're done with the **whole** challenge, use `rspec` to make sure it satisfies the specs.
 
 **Features**
+
 Once again, you must have a precise idea of the features of your app in order to build your routes. Here is the list of features:
 
 - A user can see all the lists

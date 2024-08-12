@@ -1,7 +1,7 @@
 ## Contexte et objectifs
 
 Nous souhaitons construire une petite application web [Sinatra](http://www.sinatrarb.com/) pour afficher toutes les informations de la base de données Jukebox que tu as utilisée dans certains des challenges de la journée.
-Tu peux utiliser `rake` pour tester ton application Sinatra. Lance-le avec la commande habituelle `rake`.
+Tu peux utiliser `rake` pour tester ton application Sinatra. Lance-le avec la commande `bundle exec rake`.
 
 ## Mise en place
 
@@ -46,4 +46,4 @@ Tu dois coder une page `/albums/:id` qui affiche les morceaux de cet album. En c
 
 Tu dois coder une page `/tracks/:id` qui affiche toutes les infos du morceau, et si tu as le temps, tu peux jeter un œil à un service d’API vidéo comme YouTube pour ajouter une vidéo sur cette page.
 
-Quand tu as fini, utilise [`ngrok`](https://github.com/lewagon/sinatra-101/blob/master/README.md#share-with-the-world) pour lancer un serveur que tu pourras partager sur Slack! 👌
+Quand tu as fini, utilise [`ngrok`](https://github.com/lewagon/sinatra-101#share-with-the-world) pour lancer un serveur que tu pourras partager sur Slack! 👌

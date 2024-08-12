@@ -22,6 +22,13 @@ git add .
 git commit -m "rails new"
 gh repo create --public --source=.
 git push origin master
+echo "gem 'rspec-rails', group: [ :test ]" >> Gemfile
+echo "gem 'rails-controller-testing', group: [ :test ]" >> Gemfile
+bundle install
+git submodule add git@github.com:lewagon/rails-simple-airbnb-specs.git spec
+git add .
+git commit -m "Prepare rails app with external specs"
+rspec # to run the tests
 ```
 
 ## Configuration front-end
@@ -65,6 +72,20 @@ Puis exécute :
 ```bash
 bundle install
 rails generate simple_form:install --bootstrap
+```
+
+### Tester ton code
+
+Chaque fois que tu ajoutes des migrations à ton application (par exemple, après un `rails g model ...`), n'oublie pas d'exécuter également les migrations **sur la base de données de test** que nous utilisons dans nos spécifications :
+
+```bash
+rails db:migrate RAILS_ENV=test  # Si tu as ajouté une migration
+```
+
+Ensuite, teste ton code avec :
+
+```bash
+rspec
 ```
 
 ## Spécifications
@@ -113,7 +134,7 @@ La vue doit faire une boucle dessus pour les afficher, comme sur la capture d'é
 
 Souviens-toi que pour créer un appartement, on a besoin de deux routes. Une route sert à afficher le formulaire du nouvel appartement, l'autre à gérer la requête `POST` générée à l'envoi du formulaire. Essaie d'utiliser directement l'objet d'aide `form_with` dans ta vue et de créer un joli formulaire !
 
-![](https://raw.githubusercontent.com/lewagon/fullstack-images/master/rails/simple-airbnb/index.png)
+![](https://raw.githubusercontent.com/lewagon/fullstack-images/master/rails/simple-airbnb/new.png)
 
 ### 6 - En tant qu'utilisateur, je peux voir les détails d'un appartement donné
 

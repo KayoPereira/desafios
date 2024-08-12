@@ -21,7 +21,7 @@ Open [`localhost:8000`](http://localhost:8000) in your browser.
 First, you will need to create a MapBox account and get an API key (it's free to sign up!) Then, read the [MapBox Geocoding API documentation](https://docs.mapbox.com/api/search/geocoding/). It boils down to doing an HTTP `GET` request with an address as a query string parameter.
 
 ```javascript
-'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=YOUR-API-KEY'
+'https://api.mapbox.com/search/geocode/v6/forward?q=Los%20Angeles&access_token=YOUR-API-KEY'
 ```
 
 NOTE: The request to the MapBox API will require your API key as one of the parameters in your request. You can find your key on your [account page](https://www.mapbox.com/account/) once you have created an account and signed in.
@@ -34,14 +34,15 @@ When you fetch data from an API, start by `console.log()`ing what you get back f
 
 Hint: Mapbox returns coordinates with longitude first, and latitude second!
 
-### [OPTIONAL] Displaying a map
+### (OPTIONAL) Displaying a map
 
 To display a MapBox Map with a marker at the specified address, we'll use a second API, the [MapBox JavaScript API](https://www.mapbox.com/mapbox-gl-js/api/).
 
-To use it, add this line in the `head` of your HTML file, so you can use MapBox's stylesheet for your map:
+To use it, add these lines in the `head` of your HTML file, so you can use MapBox's JavaScript and CSS for your map:
 
 ```html
-<link href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css" rel="stylesheet">
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
 ```
 
 To add a map, you'll need an empty supporting HTML element. For instance:
@@ -51,12 +52,6 @@ To add a map, you'll need an empty supporting HTML element. For instance:
 ```
 
 To easily build the map and add a marker to it, we'll add [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/guides/install/).
-To display a map in your `#map` HTML element with Mapbox GL JS, you will have to add these lines in your `index.html`.
-
-```html
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
-```
 
 And then display a map:
 

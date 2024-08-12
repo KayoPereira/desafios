@@ -87,7 +87,7 @@ Une instance Vue est déjà créée avec la fonction `createApp()`. Tu vas coder
 #### Données
 
 <details>
-<summary markdown='span'>Dans une instance Vue, où placer les données des to-do ?
+<summary markdown='span'>Dans une instance Vue, où placer les données des to-do ?</summary>
 
 Tu as les mêmes éléments de tâches dans un array :
 
@@ -153,6 +153,8 @@ Voilà, c'est fait ! Félicitations pour ta première application Vue ! 🥂 Mai
 </details>
 
 ### 2. Ajouter une tâche (optionnel)
+
+Tout d'abord, tu devrais ajouter un nouveau bouton qui dit "Ajouter une tâche". N'hésite pas à utiliser les classes Bootstrap pour cela et le styliser à ta guise.
 
 <details>
 <summary markdown='span'>Que se passe-t-il lorsqu'un utilisateur ajoute une tâche ? </summary>
